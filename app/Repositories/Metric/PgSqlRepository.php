@@ -62,7 +62,7 @@ class PgSqlRepository extends AbstractMetricRepository implements MetricInterfac
             "AND {$this->getMetricPointsTable()}.created_at >= (NOW() - INTERVAL '{$hour}' HOUR) ".
             "AND {$this->getMetricPointsTable()}.created_at <= NOW() ".
             "GROUP BY to_char({$this->getMetricPointsTable()}.created_at, 'HH24:00') ".
-            "ORDER BY {$this->getMetricPointsTable()}.created_at", [
+            "ORDER BY to_char({$this->getMetricPointsTable()}.created_at, 'HH24:00')", [
             'metricId' => $metric->id,
         ]);
 
